@@ -24,3 +24,5 @@ VOLUME [ "/app/node_modules" ]
 
 ENV NODE_ENV=production
 CMD [ "start" ]
+
+EXPOSE 3000

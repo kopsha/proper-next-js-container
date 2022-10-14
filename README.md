@@ -31,5 +31,5 @@ Or you may use the provided init script for convenience:
 1. `yarn install`
 1. `docker compose build`
 1. `docker compose run www shell`
-   1. `yarn create next-app .`
- 
+   - you may want to create next app manually
+1. `docker compose run --service-ports www dev`
