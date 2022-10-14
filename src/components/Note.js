@@ -1,17 +1,30 @@
+// Local imports
 import styles from "styles/home.module.css"
+
+// MUI Imports
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import IconButton from '@mui/material/IconButton'
 
-const Note = () => {
+function Note({content, rank}) {
     return (
         <div className={styles.note}>
-            <KeyboardArrowUpIcon />
-            <KeyboardArrowDownIcon />
-            <p className={styles.noteContent}>
-            Lorem Ipsum is simply dummy text of the printing and 
-            typesetting industry. Lorem Ipsum has been the industry's
-            standard dummy text ever since the 1500s
-            </p>
+            <IconButton aria-label="Up Vote">
+                <KeyboardArrowUpIcon sx={{
+                    backgroundColor:"#1976d2",
+                    color:"white",
+                    borderRadius:100,
+                }}/>
+            </IconButton>
+            <IconButton aria-label="Down Vote">
+                <KeyboardArrowDownIcon sx={{
+                    backgroundColor:"#1976d2",
+                    color:"white",
+                    borderRadius:100,
+                }}/>
+            </IconButton>
+            <p className={styles.noteContent}>{content}</p>
+            <h4>Rank {rank}</h4>
         </div>
     )
 }
