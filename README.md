@@ -15,3 +15,12 @@ CI/CD pipeline is a standard and has some specific needs.
 
 - a javascript version (just to mess with the newcommers)
 - a typescript version for the ones that want an easy life
+
+## Usage
+
+Before starting your project you should create an .env file with db credentials.
+Or you may use the provided init script for convenience:
+
+```bash
+./init-env.sh
+```

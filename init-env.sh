@@ -9,6 +9,7 @@ db_port=5432
 
 cat > .env << END
 PORT=$port
+DB_PORT=$db_port
 DB_ROOT_PASSWORD="$db_root_password"
 DB_USER="$db_user"
 DB_PASSWORD="$db_password"

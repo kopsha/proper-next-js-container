@@ -18,3 +18,5 @@ WORKDIR /app
 
 # COPY entrypoint next.config.js tsconfig.json /app/
 ENTRYPOINT ["/app/entrypoint"]
+
+VOLUME [ "/app/src" ]

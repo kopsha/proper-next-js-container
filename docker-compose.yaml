@@ -13,7 +13,7 @@ services:
             - local-data:/var/lib/postgresql/data
 
     www:
-        build: ./www
+        build: ./
         ports:
             - "${PORT}:3000"
         depends_on:
