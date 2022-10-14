@@ -1,5 +1,4 @@
 import { StickyNote } from "models";
-import { parse as parseUuid, v4 } from "uuid";
 
 let notes = []; // fake database
 
