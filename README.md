@@ -33,3 +33,9 @@ Or you may use the provided init script for convenience:
 1. `docker compose run www shell`
    - you may want to create next app manually
 1. `docker compose run --service-ports www dev`
+
+### How to add a package
+1. `yarn add <your package>`
+1. `yarn install`
+1. `docker compose down --remove-orphans`
+1. `docker compose build`
