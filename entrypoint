@@ -1,25 +1,22 @@
 #!/usr/bin/env bash
-
 set -e
 
 main()
 {
     case $1 in
-        "")
-            printf "\t ..: Starting in production mode\n"
-            export NODE_ENV=production
-            yarn start
-            ;;
         shell)
             bash
             ;;
-        develop)
+        dev)
             printf "\t ..: Starting developer mode\n"
-            export NODE_ENV=production
-            yarn run test:all
+            export NODE_ENV=development
+            yarn dev
+            ;;
+        *)
+            printf "\t ..: Invoking yarn with '$*'\n"
+            yarn "$*"
             ;;
     esac
 }
 
-# cd /app/src
 main "$@"

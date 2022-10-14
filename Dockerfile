@@ -16,9 +16,11 @@ COPY package.json yarn.lock /app/
 RUN yarn install --frozen-lockfile \
     && yarn cache clean
 
-COPY entrypoint /app/
-# next.config.js tsconfig.json /app/
+COPY entrypoint next.config.js /app/
 ENTRYPOINT ["/app/entrypoint"]
 
 VOLUME [ "/app/src" ]
 VOLUME [ "/app/node_modules" ]
+
+ENV NODE_ENV=production
+CMD [ "start" ]
