@@ -9,8 +9,7 @@ main()
             ;;
         dev)
             printf "\t ..: Starting developer mode\n"
-            export NODE_ENV=development
-            yarn dev
+            NODE_ENV=development yarn dev
             ;;
         *)
             printf "\t ..: Invoking yarn with '$*'\n"
@@ -18,5 +17,8 @@ main()
             ;;
     esac
 }
+
+# next needs the public folder to be mapped in project root
+ln -s ./src/public ./public
 
 main "$@"

@@ -1,7 +1,6 @@
 FROM node:lts-slim
 
 RUN apt update && apt install --yes \
-    entr \
     netcat \
     git \
     && rm -rf /var/lib/apt/lists/*
@@ -16,11 +15,11 @@ COPY package.json yarn.lock /app/
 RUN yarn install --frozen-lockfile \
     && yarn cache clean
 
-COPY entrypoint next.config.js /app/
+COPY entrypoint next.config.js jsconfig.json /app/
 ENTRYPOINT ["/app/entrypoint"]
 
 VOLUME [ "/app/src" ]
-VOLUME [ "/app/node_modules" ]
+VOLUME [ "/app/dist" ]
 
 ENV NODE_ENV=production
 CMD [ "start" ]
