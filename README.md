@@ -24,3 +24,12 @@ Or you may use the provided init script for convenience:
 ```bash
 ./init-env.sh
 ```
+
+### Steps
+
+1. `./init-env.sh`
+1. `yarn install`
+1. `docker compose build`
+1. `docker compose run www shell`
+   1. `yarn create next-app .`
+ 

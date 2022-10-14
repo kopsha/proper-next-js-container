@@ -19,7 +19,7 @@ services:
         depends_on:
             - db
         volumes:
-            - ./:/app/src
+            - ./src:/app/src
         environment:
             - DB_HOST=db
             - DB_PORT=${DB_PORT}
