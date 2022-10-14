@@ -18,7 +18,7 @@ main()
     esac
 }
 
-# next needs the public folder to be mapped in project root
+# next needs the public folder to be mapped in its project root
 ln -s ./src/public ./public
 
 main "$@"
