@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
 export class StickyNote {
-    constructor(id, message, author = null, rank = null) {
+    constructor(id = null, message = null, author = null, rank = null) {
         this.id = id;
         this.message = message;
         this.rank = parseInt(rank) || 0;
