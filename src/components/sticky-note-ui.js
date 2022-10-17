@@ -1,12 +1,12 @@
-import { StickyNote } from "models"
 import styles from "styles/home.module.css"
 
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp"
 import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown"
 import IconButton from "@mui/material/IconButton"
+import Button from '@mui/material/Button'
 
-export default function StickyNoteUI({data = null}) {
-    if (data)
+export default function StickyNoteUI({ note = null }) {
+    if (note)
         return (
             <div className={styles.note}>
                 <IconButton aria-label="Up Vote">
@@ -27,9 +27,22 @@ export default function StickyNoteUI({data = null}) {
                         }}
                     />
                 </IconButton>
-                <p className={styles.noteContent}>{data?.message}</p>
-                <h4>Rank {data?.rank}</h4>
+                <p className={styles.noteContent}>{note?.message}</p>
+                <h4>Rank {note?.rank}</h4>
             </div>
         )
-    return <div className={styles.note}>No data</div>
+    return (
+        <div className={styles.note}>
+            <h3>Create a new one</h3>
+            <form method="post">
+                <textarea
+                    name="message"
+                    rows="3"
+                    cols="20"
+                    placeholder="type your message"
+                ></textarea>
+                <Button variant="contained">Publish</Button>
+            </form>
+        </div>
+    )
 }
