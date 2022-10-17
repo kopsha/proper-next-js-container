@@ -1,28 +1,38 @@
 import Head from "next/head"
-import StickyNoteUI from "components/sticky-note-ui"
 import styles from "styles/home.module.css"
-
 import { useEffect, useState } from "react"
-import { ST } from "next/dist/shared/lib/utils"
-import { StickyNote } from "models"
+
+import { DisplayStickNote, CreateStickyNote } from "components/sticky-note-ui"
 
 export default function Home() {
     const [notes, setNotes] = useState([])
     const [busy, setBusy] = useState(false)
 
     useEffect(() => {
-        if (busy) return
         console.log("asking for /api/sticky-notes")
         setBusy(true)
         fetch("/api/sticky-notes")
             .then(response => response.json())
-            .then(data => setNotes(data))
+            .then(data => { setNotes(data); console.log("recv", data)})
             .catch(exception => console.error(exception))
             .finally(() => setBusy(false))
-    }, [...notes])
+    }, [])
 
-    const onCreate = () => {
-        console.log("create")
+    const onCreate = async message => {
+        console.log(message, Boolean(message))
+        fetch("/api/sticky-notes", {
+            method: "POST",
+            body: JSON.stringify({ message: message }),
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+        })
+            .then(response => response.json())
+            .then(new_note => {
+                console.log(new_note, "was created")
+                // notes.push(new_note)
+                setNotes(previous => [...previous, new_note])
+            })
+            .catch(exception => console.error(exception))
+            .finally(() => setBusy(false))
     }
 
     return (
@@ -34,11 +44,16 @@ export default function Home() {
                 <h1>Whiteboard</h1>
 
                 <div className={styles.whiteboardContainer}>
+                    {/* TODO: move this in its own component */}
                     {busy ? (
                         <p>Loading...</p>
                     ) : (
-                        notes.map(note => <StickyNoteUI note={note} />),
-                        <StickyNoteUI />
+                        <>
+                            {notes.map((note, ndx) => (
+                                <DisplayStickNote note={note} key={ndx} />
+                            ))}
+                            <CreateStickyNote onCreate={m => onCreate(m)} />
+                        </>
                     )}
                 </div>
             </div>

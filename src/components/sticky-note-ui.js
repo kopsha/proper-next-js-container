@@ -3,9 +3,11 @@ import styles from "styles/home.module.css"
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp"
 import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown"
 import IconButton from "@mui/material/IconButton"
-import Button from '@mui/material/Button'
+import Button from "@mui/material/Button"
+import TextField from "@mui/material/TextField"
+import { useState } from "react"
 
-export default function StickyNoteUI({ note = null }) {
+export function DisplayStickNote({ note = null }) {
     if (note)
         return (
             <div className={styles.note}>
@@ -31,17 +33,32 @@ export default function StickyNoteUI({ note = null }) {
                 <h4>Rank {note?.rank}</h4>
             </div>
         )
+}
+
+export function CreateStickyNote({ onCreate }) {
+    const [message, setMessage] = useState("")
+    const onSubmit = event => {
+        event.preventDefault()
+        if (!message) return
+        event.target.reset()
+        onCreate(message)
+    }
+
     return (
         <div className={styles.note}>
-            <h3>Create a new one</h3>
-            <form method="post">
-                <textarea
-                    name="message"
-                    rows="3"
-                    cols="20"
+            <form method="post" onSubmit={onSubmit}>
+                <TextField
+                    required
+                    label="Write a new note"
+                    id="message"
+                    multiline
+                    rows={3}
                     placeholder="type your message"
-                ></textarea>
-                <Button variant="contained">Publish</Button>
+                    onChange={e => setMessage(e.target.value)}
+                ></TextField>
+                <Button type="submit" variant="contained">
+                    Publish
+                </Button>
             </form>
         </div>
     )
