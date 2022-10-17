@@ -9,28 +9,22 @@ export default function Home() {
     const [busy, setBusy] = useState(false)
 
     useEffect(() => {
-        console.log("asking for /api/sticky-notes")
         setBusy(true)
         fetch("/api/sticky-notes")
             .then(response => response.json())
-            .then(data => { setNotes(data); console.log("recv", data)})
+            .then(data => setNotes(data))
             .catch(exception => console.error(exception))
             .finally(() => setBusy(false))
     }, [])
 
     const onCreate = async message => {
-        console.log(message, Boolean(message))
         fetch("/api/sticky-notes", {
             method: "POST",
             body: JSON.stringify({ message: message }),
             headers: { "Content-type": "application/json; charset=UTF-8" },
         })
             .then(response => response.json())
-            .then(new_note => {
-                console.log(new_note, "was created")
-                // notes.push(new_note)
-                setNotes(previous => [...previous, new_note])
-            })
+            .then(new_note => setNotes(previous => [...previous, new_note]))
             .catch(exception => console.error(exception))
             .finally(() => setBusy(false))
     }
